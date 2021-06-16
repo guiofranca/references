@@ -14,7 +14,7 @@ openssl req -x509 -nodes -new -sha256 -days 1024 -newkey rsa:2048 -keyout RootCA
 openssl x509 -outform pem -in RootCA.pem -out RootCA.crt
 ```
 
-Now, for every domain you want to serve with HTTPS, add to the end of the new file `domains.ext`, using `nano domanins.ext`.
+Now, for every domain you want to serve with HTTPS, add to the end of the new file `domains.ext`, using `nano domains.ext`.
 ```
 authorityKeyIdentifier=keyid,issuer
 basicConstraints=CA:FALSE
@@ -81,6 +81,7 @@ server {
     location ~ \.php$ {
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
         fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+        #fastcgi_pass unix:/var/run/php/php8.0-fpm.sock;
         #fastcgi_pass   127.0.0.1:9000;
         fastcgi_index index.php;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
