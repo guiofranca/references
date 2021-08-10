@@ -14,17 +14,18 @@ sudo apt install php7.4-fpm php7.4-common php7.4-mysql php7.4-mongodb php7.4-mbs
 
 # Install SQL Server Driver for PHP 7.4
 First, do this magic:
+You may change the source list according to your server version. [Available options](https://docs.microsoft.com/pt-br/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-ver15#ubuntu)
 ```
 sudo su
 curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
 curl https://packages.microsoft.com/config/ubuntu/18.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
 exit
+sudo apt update
 ```
 
 Then you'll need to install odbc for MS SQL Server, PHP Pear and other tools to compile the driver.
 
 ```
-sudo apt update
 sudo ACCEPT_EULA=Y apt install msodbcsql17
 sudo apt install php-pear
 sudo apt install unixodbc-dev
@@ -50,6 +51,7 @@ You can test if everything is working fine with the commands. They shoud output 
 ```
 php -v
 php -m
+php -m | grep sqlsrv
 ```
 
 # Install Oracle database Driver for PHP 7.4
