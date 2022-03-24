@@ -12,7 +12,23 @@ Then install PHP accorgind to your needs. The following snippet should be good t
 sudo apt install php7.4-fpm php7.4-common php7.4-mysql php7.4-mongodb php7.4-mbstring php7.4-zip php7.4-curl php7.4-xml php7.4-json php7.4-gd php7.4-redis php7.4-dev
 ```
 
-# Install SQL Server Driver for PHP 7.4
+# Changing PHP versions
+If you are upgrading your PHP version, remember to set all versions correctly. Otherwise, the build process will fail.
+To change versions, run the following commands:
+```
+sudo update-alternatives --set php /usr/bin/php8.1
+sudo update-alternatives --set phpize /usr/bin/phpize8.1
+sudo update-alternatives --set php-config /usr/bin/php-config8.1
+sudo update-alternatives --set phar /usr/bin/phar8.1
+sudo update-alternatives --set phar.phar /usr/bin/phar.phar8.1
+```
+
+You will also need to uninstall the previously installed modules in order to install them again.
+```
+sudo pecl uninstall sqlsrv pdo_sqlsrv oci8
+```
+
+# Install SQL Server Driver for PHP
 First, do this magic:
 You may change the source list according to your server version. [Available options](https://docs.microsoft.com/pt-br/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-ver15#ubuntu)
 ```
@@ -54,7 +70,7 @@ php -m
 php -m | grep sqlsrv
 ```
 
-# Install Oracle database Driver for PHP 7.4
+# Install Oracle database Driver for PHP
 Guide adapted from https://gist.github.com/hewerthomn/81eea2935051eb2500941a9309bca703
 
 Download and unzip Oracle's instant client. Install zip if you don't have it already installed.
@@ -91,6 +107,8 @@ Prepare for installation and install. When asked for instantclient location inpu
 ```
 sudo apt install php7.4-dev php7.4-pear build-essential libaio1
 sudo pecl install oci8-2.2.0
+OR for latest version
+sudo pecl install oci8
 ```
 
 Enable:
